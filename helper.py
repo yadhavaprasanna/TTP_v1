@@ -9,9 +9,9 @@ from mitigai_pydantic import mitigai_pydantic_result
 import streamlit as st
 from collections import Counter
 
-technique_df=pd.read_csv("technique_details.csv")
-group_df=pd.read_csv("groups_with_associated_techniques.csv")
-tactic_df=pd.read_csv("tactic_db.csv")
+technique_df=pd.read_csv("../dataset/technique_details.csv")
+group_df=pd.read_csv("../dataset/groups_with_associated_techniques.csv")
+tactic_df=pd.read_csv("../dataset/tactic_db.csv")
 
 openai_key = st.secrets["openai"]["openai_key"]
 deployment_name = st.secrets["openai"]["deployment_name"]
@@ -146,7 +146,10 @@ def get_group_details(threat_groups):
     return all_group_info
 
 def technique_information(input_technique_id,threshold_percent=70):
-    input_technique_name=get_technique_name(input_technique_id)
+    try:
+        input_technique_name=get_technique_name(input_technique_id)
+    except:
+        return {"error":"technique id not found"}
     current_stage=identify_stage(input_technique_id)
     groups_code=find_groups_using_technique_code(input_technique_id)
     techniques_code=get_all_techniques_by_groups_code(list(groups_code.values()))
