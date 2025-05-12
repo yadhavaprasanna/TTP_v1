@@ -9,9 +9,9 @@ from mitigai_pydantic import mitigai_pydantic_result
 import streamlit as st
 from collections import Counter
 
-technique_df=pd.read_csv("../dataset/technique_details.csv")
-group_df=pd.read_csv("../dataset/groups_with_associated_techniques.csv")
-tactic_df=pd.read_csv("../dataset/tactic_db.csv")
+technique_df=pd.read_csv("technique_details.csv")
+group_df=pd.read_csv("groups_with_associated_techniques.csv")
+tactic_df=pd.read_csv("tactic_db.csv")
 
 openai_key = st.secrets["openai"]["openai_key"]
 deployment_name = st.secrets["openai"]["deployment_name"]
